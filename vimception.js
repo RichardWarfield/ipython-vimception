@@ -180,8 +180,12 @@ all_cm( function (cm) {
 all_cm( function (cm) {
     cm.on('blur', function(cm) {
         // TODO: I wish I understood a better way to do this, but fake pressing Escape work
-        CodeMirror.keyMap['vim-insert']['Esc'](cm);
-        CodeMirror.keyMap['vim']['Esc'](cm);
+        try {
+            CodeMirror.keyMap['vim-insert']['Esc'](cm);
+        } catch (err) {}
+        try {
+            CodeMirror.keyMap['vim']['Esc'](cm);
+        } catch (err) {}
         cm.setOption('styleActiveLine', false);
         if (cm.getOption("fullScreen")) {
             cm.setOption('fullScreen', false); 
