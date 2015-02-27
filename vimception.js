@@ -89,7 +89,7 @@ to('vim');
 function vim_up(event) {
     var cell = IPython.notebook.get_selected_cell();
     if (cell && cell.at_top() && cell.code_mirror.options.keyMap === 'vim') {
-        console.log('inside the business logic k');
+        //console.log('inside the business logic k');
         event.preventDefault();
         IPython.notebook.command_mode()
         IPython.notebook.select_prev();
@@ -197,7 +197,8 @@ all_cm( function (cm) {
         }
     });
     cm.on('focus', function(cm) {
-        cm.setOption('styleActiveLine', true);
+        // RW - Changed to false.  I don't like it.
+        cm.setOption('styleActiveLine', false);
     });
 });
 
@@ -207,7 +208,7 @@ cmd.add_shortcut('i', def_cmd.enter);
 
 // not quite what we want - 'i' requires a double-tap
 // add documentation for this.
-cmd.add_shortcut('ctrl-c', function(e) { IPython.notebook.kernel.interrupt(); return false});
+cmd.add_shortcut('ctrl-i' /* was ctrl-c */, function(e) { IPython.notebook.kernel.interrupt(); return false});
 
 
 function focus_last(e) {
